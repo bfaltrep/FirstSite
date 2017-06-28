@@ -45,7 +45,7 @@
     }
     
     if(isset($_POST['picture'])){
-      /*image*/
+      /*image $error_msg_img*/
       //TODO
       
     }
@@ -123,7 +123,6 @@
                 <div class="well bs-component">
                     <form class="form-horizontal" method="post">
                       <fieldset>
-                        <?php if( ! empty( $error_msg_pseudo ) ) echo $error_msg_pseudo ?>
                         <legend>delete account</legend>
                         <div class="form-group">
                           <div class="col-lg-10 col-lg-offset-2">
@@ -136,7 +135,7 @@
                 <div class="well bs-component">
                     <form class="form-horizontal" method="get">
                       <fieldset>
-                        <?php if( ! empty( $error_msg_pseudo ) ) echo $error_msg_pseudo ?>
+                        <?php if( ! empty( $error_msg_img ) ) echo $error_msg_img ?>
                         <legend>define a personal picture</legend>
                         <div class="form-group">
                           <div class="col-lg-10 col-lg-offset-2">
