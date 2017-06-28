@@ -1,0 +1,6 @@
+# -- Ce fichier gère les script automatisés. Merci de ne pas le modifier inconsidérément.
+# Aide : http://matthieu.developpez.com/execution_periodique/#
+
+# nettoyage des personnes tentant de s'inscrire sans aller jusqu'a valider via la boite mail => 15 jours.
+# nettoyage fait tout les jours
+00 05 * * * php -f /home/ubuntu/workspace/cron/cleanValidate.php >> cronLog 2>&1

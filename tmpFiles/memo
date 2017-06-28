@@ -1,0 +1,62 @@
+ ---- TODO ----
+ - améliorer signin (validate, personal error msg)
+ - pages de messages (écrire/modifier/lire)
+ - chg mdp sur index
+ - image pr user
+ - status (0 -> user, 1 -> admin)
+ 
+ 
+ ---- TO ADAPT ----
+ use cron system instead of at + sleep
+
+
+ ---- SQL ----
+
+ mysql-ctl start/stop
+ mysql-ctl cli //interactive shell
+
+    Hostname - $IP (The same local IP as the application you run on Cloud9) --bfaltrep-php-sql-4870847
+    Port - 3306 (The default MySQL port number)
+    User - bfaltrep
+    Password - "" (No password since you can only access the DB from within the workspace)
+    Database - c9 (The database username)
+
+faltreptb !He11o
+siteDB
+
+ ---- PHP ----
+ 
+run -> clic lien.
+logs -> cat ~/lib/apache2/log/error.log 
+extraire un php ds rep courant -> phar extract -f random_compat.phar 
+
+true 1
+false 0
+
+ -- AFFICHER LES MESSAGES
+ini_set('display_errors', 'On'); //TMP
+error_reporting(E_ALL); //TMP
+
+pour avoir une boite de dialogue appellée depuis php => <?php echo '<script type="text/javascript">'.'alert("Erreur : '.$erreur.'");'.'</script>'; ?>
+
+ ---- CRON TABLE ----
+
+    - les minutes où le programme sera exécuté (de 0 à 59) ;
+    - les heures où le programme sera exécuté (de 0 à 23) ;
+    - les jours du mois où le programme sera exécuté (de 1 à 31) ;
+    - les mois où le programme sera exécuté (de 1 à 12) ;
+    - les jours de la semaine où le programme sera exécuté (de 0 à 6, 0 = dimanche, 6 = samedi) ;
+    - enfin le programme à exécuter.
+
+ ---- README ----
+
+If you want to look at the Apache logs, check out ~/lib/apache2/log
+
+Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
+To watch some training videos, visit http://www.youtube.com/user/c9ide
+
+
+
+http://bootswatch.com/
+
+	
