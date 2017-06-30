@@ -27,6 +27,7 @@ Chaque compte possède des données spécifiques :
  mysql-ctl start/stop </br>
  mysql-ctl cli -> interactive shell
 <h3>identifiants</h3>
+max droits </br>
 
     Hostname - $IP (The same local IP as the application you run on Cloud9) --bfaltrep-php-sql-4870847
     Port - 3306 (The default MySQL port number)

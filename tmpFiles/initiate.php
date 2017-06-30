@@ -9,6 +9,17 @@
         // Create connection
 
         $dbConnection = new dbManager(getenv('IP'), "bfaltrep", "", "siteDB", 3306);
+/*
+        select Host,User, Create_priv,Create_user_priv  from mysql.user;
+        SHOW DATABASES;
+        
+        create database if not exists sonarqubeDB character set = utf8 collate = utf8_bin
+        grant all privileges on sonarqubeDB.* to 'sonarUSR'@'%' identified by 'sonarUSR';
+        
+*/
+
+
+
 
         // -- GLOBALES INFOS
         echo "this page is not destined to be accessed by users. </br>" ;
