@@ -18,9 +18,6 @@
         
 */
 
-
-
-
         // -- GLOBALES INFOS
         echo "this page is not destined to be accessed by users. </br>" ;
         echo "firstly, tables currently on our database :</br><b>";

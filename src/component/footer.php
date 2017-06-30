@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <?php include_once 'var.php'; ?>
+    <?php 
+    require_once 'commun.php'; 
+    require_once 'var.php'; 
+    ?>
+    
     <footer>
         <div class="row">
           <div class="col-lg-12">

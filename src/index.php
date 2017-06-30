@@ -1,5 +1,6 @@
 <?php
     require_once 'component/var.php';
+    require_once 'component/commun.php';
     require_once 'component/db.php'; 
     session_start();
     
@@ -8,7 +9,7 @@
         $_SESSION = [];
     }
     
-    $dbConnection = new dbManager(getenv('IP'), "root", "", "siteDB", 3306);
+    $dbConnection = new dbManager();
 
     if(isset($_POST['inputloginpsd']) && isset($_POST['inputloginpsw']) && !empty($_POST['inputloginpsd']) && !empty($_POST['inputloginpsw'])) {
         $login = $dbConnection->cleanInput($_POST['inputloginpsd']);
@@ -44,7 +45,7 @@
         <div class="container">
             <div class="page-header" id="banner">
                 TMP
-                <a class="btn btn-default" href="./tmpFiles/initiate.php">MAJ Tables</a> <!--TMP-->
+                <a class="btn btn-default" href="./admin/initiate.php">MAJ Tables</a> <!--TMP-->
             
                 <?php
                 if(!isset($_SESSION['pseudo'])  && empty($_SESSION['pseudo'])){
@@ -79,8 +80,6 @@
 
             <?php  require_once 'component/footer.php'; ?>
         </div>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
-        <script src="./js/custom.js"></script>
+        <?php  require_once 'component/commun_final.php'; ?>
     </body>
 </html>

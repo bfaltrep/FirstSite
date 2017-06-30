@@ -1,5 +1,6 @@
 <?php
     require_once 'component/var.php';
+    require_once 'component/commun.php';
     require_once 'component/db.php'; 
     
     $error_smg = '';
@@ -10,7 +11,7 @@
 
     if(isset($pseudo) && isset($psw) && isset($psw2)) {
         if($psw === $psw2 && $psw === trim($psw)) {
-            $dbConnection = new dbManager(getenv('IP'), "root", "", "siteDB", 3306);
+            $dbConnection = new dbManager();
             
             $pseudo = $dbConnection->cleanInput($pseudo);
             $psw = $dbConnection->cleanInput($psw);
@@ -80,8 +81,6 @@
             require_once 'component/footer.php'; 
           ?>
         </div>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
-        <script src="./js/custom.js"></script>
+        <?php  require_once 'component/commun_final.php'; ?>
     </body>
 </html>

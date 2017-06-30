@@ -1,5 +1,6 @@
 <?php
     require_once 'component/var.php';
+    require_once 'component/commun.php';
     require_once 'component/lib/random_compat.phar';
     require_once 'component/db.php'; 
     
@@ -14,7 +15,7 @@
       
       if($pass1 === $pass2 && $pass1 === trim($pass1)) {
         if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
-          $dbConnection = new dbManager(getenv('IP'), "root", "", "siteDB", 3306);
+          $dbConnection = new dbManager();
           
           $pseudo = $dbConnection->cleanInput($pseudo);
           $mail = $dbConnection->cleanInput($mail);
@@ -168,8 +169,6 @@
             require_once 'component/footer.php'; 
           ?>
         </div>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
-        <script src="./js/custom.js"></script>
+        <?php  require_once 'component/commun_final.php'; ?>
     </body>
 </html>

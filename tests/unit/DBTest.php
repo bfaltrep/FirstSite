@@ -1,15 +1,13 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-include "../../component/db.php";
-
+//phpunit --bootstrap component/db.php tests/unit/DBTest
 /**
  * @covers dbManager
 */
 final class TestDB extends TestCase
 {
     private $db; // - elmt testé
-    private $bdd; // - référence
     private $create = "create table if not exists `testDB` (`db_id` INTEGER UNIQUE NOT NULL, PRIMARY KEY (`db_id`))ENGINE=INNODB;";
     private $delete = "drop table `testDB`;";
 
@@ -25,15 +23,17 @@ final class TestDB extends TestCase
 
     protected function setUp()
     {
-        $this->bdd = new mysqli(getenv('IP'), "root", "", "siteDB", 3306);
-        $this->db = new dbManager(getenv('IP'), "root", "", "siteDB", 3306);
         
-        $this->bdd->query($this->create);
+        $this->db = new dbManager();
+        
+        $bdd = new mysqli(getenv('IP'), getenv('C9_USER'), "", "siteDB", 3306);
+        $bdd->query($this->create);
     }
     
     protected function tearDown()
     {
-        $this->bdd->query($this->delete);
+        $bdd = new mysqli(getenv('IP'), getenv('C9_USER'), "", "siteDB", 3306);
+        $bdd->query($this->delete);
     }
   
     public function testRequestSimple()
@@ -65,8 +65,24 @@ final class TestDB extends TestCase
         
         $arg2 = "coucou'";
         $arg3 = $this->db->cleanInput($arg2);
-        //echo $arg2." -> ".$this->db->cleanInput($arg2);
         $this->assertNotEquals($arg3, $arg2);
         $this->assertEquals($arg3,"coucou\'");
+    }
+    
+    public function testgetUser(){
+        include_once $_SERVER['HOME']."/workspace/src/component/var.php";
+        
+        $pseudo = "admin";
+        $result = $this->db->getUserFromMailOrPseudo($pseudo);
+        $this->assertEquals($pseudo, $result->fetch_assoc()["us_pseudo"]);
+        
+        global $siteAddress;
+        $pseudo = $siteAddress;
+        $result = $this->db->getUserFromMailOrPseudo($pseudo);
+        $this->assertEquals($pseudo, $result->fetch_assoc()["us_mail"]);
+        
+        $pseudo = "gerard";
+        $result = $this->db->getUserFromMailOrPseudo($pseudo);
+        $this->assertEquals($result->num_rows, 0);
     }
 }

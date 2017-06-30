@@ -12,7 +12,7 @@
         public $dbport;
         
         public $db;
-
+/*
         function __construct($servername, $username, $password, $database, $dbport) {
             $this->servername = $servername;
             $this->username = $username;
@@ -26,26 +26,45 @@
                 die("Connection failed: " . $this->db->connect_error." ");
             }
         }
+*/
+        function __construct(){
+            $this->servername = getenv('IP');
+            $this->username = getenv('C9_USER');
+            $this->password = "";
+            $this->database = "siteDB";
+            $this->dbport = 3306;
+            //TODO : singleton
+            $this->db = new mysqli($this->servername, $this->username, $this->password, $this->database, $this->dbport);
+            // Check connection
+            if ($this->db->connect_error) {
+                die("Connection failed: " . $this->db->connect_error." ");
+            }
+        }
 
         function __destruct() {
             $this->db->close();
         }
         
-        //  -- generiques
+        //  -- generics
         
         function requestSimpleQuery($request){
-            $res = $this->db->query($request);
-            // if(! ($res === TRUE)){
-            //     echo "request ERROR: ".$this->db->error."</br> for ".$request."</br>";
-            // }
-            return  $res;
+            $result = $this->db->query($request);
+            if(! ($result === TRUE)){
+                include_once 'var.php'; 
+                $logfile = fopen($siteHome."log/site.log", 'a+');
+                fputs($logfile, "[".date("Y-m-d H:i")."] request ERROR: ".$this->db->error."\n on request \n".$request."\n");
+                fclose($logfile);
+            }
+            return  $result;
         }
         
         function requestResultQuery($request){
             $result = $this->db->query($request);
             if(!$result){
-                echo $this->db->error." for ".$request;
-                die($this->db->error);
+                include_once 'var.php'; 
+                $logfile = fopen($siteHome."log/site.log", 'a+');
+                fputs($logfile, "[".date("Y-m-d H:i")."] request ERROR: ".$this->db->error."\n on request \n".$request."\n");
+                fclose($logfile);
             }
             return $result;
         }
@@ -99,7 +118,7 @@
                 "PRIMARY KEY (`us_id`)".
                 ")ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_bin;";
             $this->requestSimpleQuery($sql);
-            
+
             $sql = "create table if not exists `tmpValidate` (".
                 "`val_pseudo` VARCHAR(30) UNIQUE NOT NULL, ".  
                 "`val_password` VARCHAR(255) NOT NULL, ".
@@ -112,13 +131,14 @@
                 ")ENGINE=INNODB;";
             $this->requestSimpleQuery($sql);
             
+            
             $sql = "create table if not exists `messages` (".
                 "`msg_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, ".
-                "`msg_user` VARCHAR(30) NOT NULL, ".
+                "`msg_id_user` INTEGER NOT NULL, ".
                 "`msg_ValidateDate` DATETIME NOT NULL, ".
                 "`msg_msg` TEXT NOT NULL, ".
                 "PRIMARY KEY (`msg_id`), ". 
-                "CONSTRAINT fk_messages_users FOREIGN KEY (msg_user) REFERENCES users(us_pseudo) ".
+                "CONSTRAINT fk_messages_users FOREIGN KEY (`msg_id_user`) REFERENCES users(`us_id`) ".
                 "ON UPDATE CASCADE ON DELETE CASCADE".
                 ")ENGINE=INNODB;";
             $this->requestSimpleQuery($sql);
@@ -146,7 +166,6 @@
                 $sql = "SELECT * FROM `users` WHERE `us_mail` = '".$login."';";
             else
                 $sql = "SELECT * FROM `users` WHERE `us_pseudo` = '".$login."';";
-                
             return $this->requestResultQuery($sql);
         }
         

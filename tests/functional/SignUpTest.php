@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers signup
  */
-final class TestsignIn extends TestCase
+final class SignInTest extends TestCase
 {
     public function testAllValid()
     {
