@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-//phpunit --bootstrap component/db.php tests/unit/DBTest
+// cd ~/workspace ; phpunit --bootstrap src/component/db.php tests/unit/DBTest  
 /**
  * @covers dbManager
 */
@@ -22,35 +22,42 @@ final class TestDB extends TestCase
     // protected function afterClass() {}
 
     protected function setUp()
-    {
-        
+    { 
         $this->db = new dbManager();
-        
+    }
+    /*
+    protected function tearDown()
+    { }
+*/
+    private function beforeGenerics(){
         $bdd = new mysqli(getenv('IP'), getenv('C9_USER'), "", "siteDB", 3306);
         $bdd->query($this->create);
     }
-    
-    protected function tearDown()
-    {
+
+    private function afterGenerics(){
         $bdd = new mysqli(getenv('IP'), getenv('C9_USER'), "", "siteDB", 3306);
         $bdd->query($this->delete);
     }
+
+    // -- Tests
   
-    public function testRequestSimple()
-    {
+    public function testRequestSimple(){
+        $this->beforeGenerics();
         $sql = "INSERT INTO testDB (`db_id`) VALUES (1);";
         $this->assertTrue($this->db->requestSimpleQuery($sql));
         $this->assertFalse($this->db->requestSimpleQuery($sql));
+        $this->afterGenerics();
     }
     
-    public function testResultQuery()
-    {
+    public function testResultQuery(){
+        $this->beforeGenerics();
         $sql = "INSERT INTO testDB (`db_id`) VALUES (2);";
         $this->db->requestSimpleQuery($sql);
         
         $result = $this->db->requestResultQuery("select `db_id` from testDB where `db_id`=2;");
         $val = $result->fetch_assoc()["db_id"];
         $this->assertEquals($val, 2);
+        $this->afterGenerics();
     }
     
     public function testCleanInput(){
@@ -69,8 +76,10 @@ final class TestDB extends TestCase
         $this->assertEquals($arg3,"coucou\'");
     }
     
-    public function testgetUser(){
-        include_once $_SERVER['HOME']."/workspace/src/component/var.php";
+    //      -- get 
+    
+    public function testGetUser(){
+        include_once "src/component/var.php";
         
         $pseudo = "admin";
         $result = $this->db->getUserFromMailOrPseudo($pseudo);
@@ -84,5 +93,18 @@ final class TestDB extends TestCase
         $pseudo = "gerard";
         $result = $this->db->getUserFromMailOrPseudo($pseudo);
         $this->assertEquals($result->num_rows, 0);
+    }
+    
+    public function testGetPicture(){
+        include_once "src/component/var.php";
+        global $adminPicture;
+        global $defaultPicture;
+        
+        echo "TUUUUT : ".($adminPicture==NULL);
+        $result = $this->db->getPicture("admin");
+        $this->assertEquals($result,$adminPicture);
+        
+        $result = $this->db->getPicture("anonym");
+        $this->assertEquals($result,$defaultPicture);
     }
 }

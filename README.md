@@ -3,10 +3,15 @@
 <p>    
 Un site nécessitant un système de connexion dont le but est de gérer des messages (type forum probablement).
 Chaque compte possède des données spécifiques : 
-    - pseudo
-    - image
-    - nb messages
-    - statut (administrateur)
+  <ul>
+    <li>pseudo</li>
+    <li>image</li>
+    <li>nb messages</li>
+    <li>statut (administrateur)</li>
+  </ul> 
+
+Je vais faire évoluer cette version du site pour faire Horreur A Arkham
+Pour afficher le site, cliquer sur "start" dans le menu puis ouvrir cette adresse : https://php-sql-bfaltrep.c9users.io/
 </p>    
 <h2>TO DO</h2>
 <ul>

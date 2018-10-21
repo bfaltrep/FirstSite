@@ -2,7 +2,7 @@
 ini_set('display_errors', 'On'); //TMP
 error_reporting(E_ALL); //TMP
 
-    $siteName = "PatateMsg";
+    $siteName = "Horreur à Arkham - Jeu en ligne";
     $siteAddress = "berenice.faltrept@cgi.com";
     $siteCreatorLink = "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/lulu/";
     $siteFacebook = "https://www.facebook.com/";

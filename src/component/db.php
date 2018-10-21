@@ -113,7 +113,7 @@
                 "`us_password` VARCHAR(255) NOT NULL, ".
                 "`us_regDate` DATETIME NOT NULL, ".
                 "`us_status` INTEGER NOT NULL,".
-                "`us_picture` VARCHAR(20),". //14+id
+                "`us_picture` VARCHAR(30),". //14+id
                 "`us_nb_msg` INTEGER NOT NULL,".
                 "PRIMARY KEY (`us_id`)".
                 ")ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_bin;";
