@@ -1,10 +1,11 @@
 <?php
-ini_set('display_errors', 'On'); //TMP
-error_reporting(E_ALL); //TMP
+    ini_set('display_errors', 'On'); //TMP
+    error_reporting(E_ALL); //TMP
 
     $siteName = "Horreur à Arkham - Jeu en ligne";
-    $siteAddress = "berenice.faltrept@cgi.com";
+    $siteAddress = "soumackb@hotmail.fr";
     $siteCreatorLink = "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/lulu/";
+    $siteCreatorName = "Moa";
     $siteFacebook = "https://www.facebook.com/";
     //$siteRSS = "";
     $siteTwitter = "https://twitter.com/?lang=fr";
@@ -20,8 +21,8 @@ error_reporting(E_ALL); //TMP
     $pswPattern ="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$";
     
     // -- fichiers par defaut
-    $defaultPicture = "pictures/users/anonym.jpeg";
-    $adminPicture = "pictures/users/admin.jpeg";
+    $defaultPicture = "pictures/Site/users/anonym.jpeg";
+    $adminPicture = "pictures/Site/users/admin.jpeg";
     if(isset($_SERVER['HOME']))
         $siteHome = $_SERVER['HOME']."/workspace/";
     else

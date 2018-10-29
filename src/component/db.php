@@ -1,6 +1,6 @@
 <?php    
 
-   // include "var.php";
+   // include "var_site.php";
 
     class dbManager{
 
@@ -50,7 +50,7 @@
         function requestSimpleQuery($request){
             $result = $this->db->query($request);
             if(! ($result === TRUE)){
-                include_once 'var.php'; 
+                include_once 'var_site.php'; 
                 $logfile = fopen($siteHome."log/site.log", 'a+');
                 fputs($logfile, "[".date("Y-m-d H:i")."] request ERROR: ".$this->db->error."\n on request \n".$request."\n");
                 fclose($logfile);
@@ -61,7 +61,7 @@
         function requestResultQuery($request){
             $result = $this->db->query($request);
             if(!$result){
-                include_once 'var.php'; 
+                include_once 'var_site.php'; 
                 $logfile = fopen($siteHome."log/site.log", 'a+');
                 fputs($logfile, "[".date("Y-m-d H:i")."] request ERROR: ".$this->db->error."\n on request \n".$request."\n");
                 fclose($logfile);
@@ -145,7 +145,7 @@
         }
         
         function insertBasicsUsers(){
-            include_once 'var.php'; 
+            include_once 'var_site.php'; 
             
             global $defaultPicture, $siteAddress, $adminPicture;
             

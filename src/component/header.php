@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <?php 
-    require_once 'var.php';
+    require_once 'var_site.php';
     require_once 'commun.php';
     ?>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <!-- <img src="../pictures/logo.png" alt="Logo" style="width:304px;height:228px;"> -->
+          <!-- <img src="../pictures/Site/logo.png" alt="Logo" style="width:304px;height:228px;"> -->
           <a href="../" class="navbar-brand"><?php echo $siteName ?></a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
